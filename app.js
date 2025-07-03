@@ -3,9 +3,13 @@ const fs = require('fs/promises');
 
 const server = http.createServer((req, res) => {
     async function sendData(path) {
-        const fd = await fs.open(path);
+        try {const fd = await fs.open(path);
         const data = await fd.readFile();
         res.end(data);
+        } catch (err) {
+            res.statusCode = 500;
+            res.end("Something went wrong");
+        }
     };
     res.setHeader("Content-type", "text-html");
     switch (req.url) {
