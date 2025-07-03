@@ -1,6 +1,5 @@
 const http = require("http");
 const fs = require('fs/promises');
-const { text } = require("stream/consumers");
 
 const server = http.createServer((req, res) => {
     async function sendData(path) {
